@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Clarity Quotient | Sunitaa Chowdary</title>
+<meta name="description" content="In 2 minutes, find out how clear your child (Class VIII–XII) really is about their stream and future career. Free, no spam.">
+<!--
+  ============================================================
+  CAREER CLARITY QUOTIENT — landing page (V4 for Sunitaa Chowdary)
+  V4 changes: new hero copy + 5 questions (from Sunitaa's doc), new photo
+  (sunitaa.jpg), session-photo gallery (student1-4.jpg), updated result cards.
+  Lead capture (Google Sheet) + Cal.com booking already wired below.
+  To deploy: drop this whole folder onto app.netlify.com/drop.
+  ============================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600;0,9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cloud:#F6F4EF; --indigo:#23346B; --indigo2:#1A2750; --coral:#EE6C4D;
+    --aqua:#3AAFA9; --gold:#F2A649; --ink:#2B2D33; --muted:#8A8F99; --line:#E2DED4;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',system-ui,Arial,sans-serif; background:var(--cloud); color:var(--ink); line-height:1.55; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:980px; margin:0 auto; padding:0 22px;}
+  h1,h2,h3,h4,.big{font-family:'Sora',sans-serif;}
+  .accent{font-family:'Fraunces',serif; font-style:italic; font-weight:600;}
+
+  header{position:sticky; top:0; z-index:50; background:rgba(246,244,239,.92); backdrop-filter:blur(8px); border-bottom:2px solid var(--indigo);}
+  .bar{display:flex; justify-content:space-between; align-items:center; padding:11px 22px; max-width:980px; margin:0 auto;}
+  .tag{font-family:'Sora'; font-weight:800; color:var(--indigo); letter-spacing:1.5px; font-size:12.5px;}
+  .brand{font-size:12px; color:var(--muted); font-weight:600; text-align:right;}
+  .brand b{color:var(--indigo);}
+
+  .hero{background:linear-gradient(160deg,var(--indigo) 0%,#1b2a57 55%,#22346b 100%); color:var(--cloud); padding:58px 0 128px;}
+  .herogrid{display:grid; grid-template-columns:1.5fr 1fr; gap:36px; align-items:center;}
+  .eyebrow{color:var(--gold); font-weight:700; letter-spacing:2.5px; font-size:12.5px; text-transform:uppercase; margin-bottom:15px; font-family:'Sora';}
+  .hero h1{font-size:clamp(32px,5.6vw,58px); line-height:1.05; font-weight:800; letter-spacing:-.5px; margin-bottom:16px;}
+  .hero h1 span{color:var(--coral);}
+  .hero .sub{font-size:clamp(16px,2.2vw,20px); color:#C7D0E6; max-width:640px; font-weight:400; margin-bottom:16px;}
+  .vbullets{list-style:none; display:flex; flex-wrap:wrap; gap:8px 22px; margin-bottom:16px;}
+  .vbullets li{font-size:14px; color:#DCE3F2; font-weight:500; position:relative; padding-left:24px;}
+  .vbullets li:before{content:"\2713"; position:absolute; left:0; top:-1px; color:var(--gold); font-weight:800;}
+  .hero .quoteline{font-size:clamp(17px,2.4vw,21px); color:var(--aqua); margin-top:2px;}
+  .facecard{text-align:center;}
+  .avatar{width:min(190px,54vw); height:min(190px,54vw); border-radius:50%; margin:0 auto 12px; object-fit:cover; object-position:50% 14%; border:3px solid rgba(242,166,73,.75); box-shadow:0 16px 40px rgba(0,0,0,.34); display:block; background:#1b2a57;}
+  .facecard .who{font-size:16px; font-weight:800; color:#fff; font-family:'Sora';}
+  .facecard .cred{font-size:12.5px; color:#AEB9D6; max-width:270px; margin:5px auto 0; line-height:1.5;}
+
+  .card{background:#fff; border-radius:18px; box-shadow:0 22px 54px rgba(35,52,107,.16); max-width:760px; margin:-84px auto 0; position:relative; z-index:5; padding:34px 34px 30px;}
+  .card h2{font-size:clamp(24px,3.6vw,30px); color:var(--indigo); font-weight:800; letter-spacing:-.4px; margin-bottom:4px;}
+  .card .lead{font-size:15.5px; color:var(--muted); margin-bottom:8px;}
+  .progress{height:6px; background:#ECE8DE; border-radius:6px; margin:16px 0 22px; overflow:hidden;}
+  .progress i{display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--aqua),var(--coral)); border-radius:6px; transition:width .35s ease;}
+
+  .q{border-bottom:1px solid var(--line); padding:16px 0;}
+  .q:last-of-type{border-bottom:none;}
+  .q .qtext{font-family:'Sora'; font-weight:700; font-size:16.5px; color:var(--indigo); margin-bottom:12px; display:flex; gap:9px;}
+  .q .qtext .n{color:var(--coral);}
+  .opts{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;}
+  .opt{border:2px solid var(--line); border-radius:11px; padding:11px 12px; font-size:13.5px; font-weight:600; color:var(--ink); cursor:pointer; text-align:center; transition:all .14s ease; background:#fff; user-select:none;}
+  .opt:hover{border-color:var(--aqua);}
+  .opt.sel{border-color:var(--indigo); background:var(--indigo); color:#fff; box-shadow:0 6px 16px rgba(35,52,107,.22);}
+
+  .cta{display:inline-block; background:var(--coral); color:#fff; font-family:'Sora'; font-weight:800; font-size:18px; padding:17px 34px; border-radius:50px; text-decoration:none; border:none; cursor:pointer; transition:transform .15s ease, box-shadow .2s ease; box-shadow:0 8px 24px rgba(238,108,77,.32);}
+  .cta:hover{transform:translateY(-2px); box-shadow:0 12px 30px rgba(238,108,77,.45);}
+  .cta.dim{background:#C9C4B8; box-shadow:none; cursor:not-allowed; transform:none;}
+  .fullbtn{width:100%; margin-top:22px;}
+  .trust{text-align:center; font-size:12.5px; color:var(--muted); margin-top:12px;}
+
+  /* Lead gate */
+  .gate{display:none; max-width:760px; margin:26px auto 0; background:var(--indigo); border-radius:18px; padding:32px 34px; color:var(--cloud); box-shadow:0 18px 44px rgba(35,52,107,.28);}
+  .gate.on{display:block; animation:pop .45s cubic-bezier(.2,.7,.3,1.2);}
+  @keyframes pop{from{opacity:0; transform:translateY(18px) scale(.98);} to{opacity:1; transform:none;}}
+  .gate h3{font-size:23px; font-weight:800; color:#fff; margin-bottom:6px; font-family:'Sora';}
+  .gate h3 span{color:var(--gold);}
+  .gate p{font-size:14.5px; color:#B7C0DA; margin-bottom:18px;}
+  .fgrid{display:grid; grid-template-columns:1fr 1fr; gap:16px 18px;}
+  .fg{display:flex; flex-direction:column;}
+  .fg label{font-family:'Sora'; font-size:12.5px; font-weight:700; color:var(--gold); letter-spacing:.3px; margin-bottom:6px; text-transform:uppercase;}
+  .fg input, .fg select{border:2px solid #33427a; background:#1b2954; color:#fff; border-radius:10px; padding:13px 14px; font-size:16px; font-weight:600; outline:none; width:100%; transition:border-color .15s;}
+  .fg input::placeholder{color:#7f8bb3;}
+  .fg input:focus, .fg select:focus{border-color:var(--gold);}
+  .gerr{display:none; background:#5b241c; color:#FBD9CF; font-size:13.5px; font-weight:600; border-radius:8px; padding:10px 14px; margin-top:14px;}
+  .lock{font-size:12px; color:#93A0C4; text-align:center; margin-top:12px;}
+
+  /* Result */
+  #result{display:none; padding:52px 0 20px;}
+  #result.on{display:block;}
+  .bignum-wrap{text-align:center; margin-bottom:6px;}
+  .bignum-label{font-family:'Sora'; font-size:12.5px; font-weight:700; letter-spacing:2.5px; color:var(--muted); text-transform:uppercase;}
+  .bignum{font-family:'Sora'; font-size:clamp(60px,12vw,104px); font-weight:800; letter-spacing:-2px; line-height:1.02;}
+  .bignum small{font-size:.36em; color:var(--muted); font-weight:700; letter-spacing:0;}
+  .bandpill{display:inline-block; font-family:'Sora'; font-weight:800; font-size:16px; padding:8px 22px; border-radius:50px; color:#fff; margin-top:6px;}
+  .rhead{text-align:center; font-size:16px; color:var(--muted); margin:14px auto 0; max-width:600px;}
+
+  .statgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:30px 0 8px;}
+  .stat{background:#fff; border-radius:14px; padding:18px 14px; text-align:center; box-shadow:0 8px 22px rgba(35,52,107,.07); border-top:5px solid var(--aqua);}
+  .stat.warn{border-top-color:var(--coral);}
+  .stat .v{font-family:'Sora'; font-size:clamp(16px,2.4vw,20px); font-weight:800; color:var(--indigo);}
+  .stat .k{font-size:11.5px; color:var(--muted); font-weight:600; margin-top:5px; letter-spacing:.2px;}
+
+  .msg{background:linear-gradient(135deg,#fff,#F3F0E7); border:2.5px solid var(--gold); border-radius:14px; padding:22px 26px; margin:24px auto; max-width:780px;}
+  .msg p{font-size:16px; color:var(--ink);}
+  .msg b{color:var(--coral); font-weight:700;}
+
+  /* video + booking */
+  .vsl{background:var(--indigo); color:var(--cloud); border-radius:18px; padding:40px 36px; margin:40px 0; text-align:center;}
+  .vsl h3{font-size:clamp(24px,3.6vw,32px); font-weight:800; color:#fff; margin-bottom:8px; font-family:'Sora';}
+  .vsl h3 span{color:var(--gold);}
+  .vsl p{color:#B7C0DA; font-size:15.5px; max-width:560px; margin:0 auto 22px;}
+  .vsl .invite{font-size:14px; color:#93A0C4; margin-top:14px;}
+
+  /* session gallery */
+  .gallery{padding:54px 0 6px;}
+  .gallery h3{font-family:'Sora'; text-align:center; color:var(--indigo); font-size:clamp(23px,3.6vw,30px); font-weight:800; margin-bottom:6px;}
+  .gallery .gsub{text-align:center; color:var(--muted); font-size:14.5px; margin-bottom:26px;}
+  .ggrid{display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:920px; margin:0 auto;}
+  .ggrid img{width:100%; height:230px; object-fit:cover; border-radius:14px; box-shadow:0 10px 26px rgba(35,52,107,.12); display:block;}
+
+  /* social proof */
+  .proof{padding:52px 0 8px;}
+  .proof h3{font-family:'Sora'; text-align:center; color:var(--indigo); font-size:clamp(23px,3.6vw,30px); font-weight:800; margin-bottom:6px;}
+  .proof .psub{text-align:center; color:var(--muted); font-size:14.5px; margin-bottom:28px;}
+  .tgrid{display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:900px; margin:0 auto;}
+  .tcard{background:#fff; border-radius:16px; padding:24px 26px; box-shadow:0 10px 30px rgba(35,52,107,.08); border-top:5px solid var(--coral);}
+  .tcard .quote{font-size:14.5px; color:var(--ink); margin-bottom:14px; line-height:1.6;}
+  .tcard .ba{font-size:12.5px; color:var(--muted); margin-bottom:12px; border-top:1px dashed var(--line); padding-top:12px;}
+  .tcard .ba b{color:var(--aqua);}
+  .tcard .who{font-family:'Sora'; font-weight:700; font-size:12.5px; color:var(--indigo);}
+  .credbar{text-align:center; color:var(--muted); font-size:13px; margin:30px auto 0; max-width:820px; line-height:1.6;}
+  .credbar b{color:var(--indigo);}
+
+  footer{background:var(--indigo); color:#B7C0DA; padding:28px 0; text-align:center; font-size:13px; margin-top:56px;}
+  footer b{color:#fff;}
+  footer .accent{color:var(--aqua); font-size:15px;}
+
+  @media(max-width:760px){
+    .herogrid{grid-template-columns:1fr; text-align:center;}
+    .vbullets{justify-content:center;}
+    .opts{grid-template-columns:1fr;}
+    .fgrid{grid-template-columns:1fr;}
+    .statgrid{grid-template-columns:1fr 1fr;}
+    .tgrid{grid-template-columns:1fr;}
+    .ggrid{grid-template-columns:1fr;}
+    .ggrid img{height:210px;}
+    .card{padding:26px 20px;} .gate{padding:26px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <div class="tag">CAREER CLARITY QUOTIENT</div>
+    <div class="brand">A free tool by <b>Sunitaa Chowdary</b></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap herogrid">
+    <div>
+      <div class="eyebrow">Free 2-Minute Career Clarity Check &middot; Class VIII–XII</div>
+      <h1>How clear is your child about their <span>stream &amp; future career</span>?</h1>
+      <p class="sub">Choosing the right stream and career shouldn't be based only on marks, trends, peer influence, or pressure. In just 2 minutes, discover your child's Career Clarity Quotient&trade; and see exactly where they need more clarity before the big decisions.</p>
+      <ul class="vbullets">
+        <li>Just 5 quick questions</li>
+        <li>Instant clarity on the gaps</li>
+        <li>Designed for parents of school students</li>
+      </ul>
+      <p class="quoteline accent">Clarity creates confidence.</p>
+    </div>
+    <div class="facecard">
+      <img class="avatar" src="sunitaa.jpg" alt="Sunitaa Chowdary, Career Clarity &amp; Confidence Coach">
+      <div class="who">Sunitaa Chowdary</div>
+      <div class="cred">Certified Career Analyst, Educator &amp; Author. 20+ years guiding students and parents to confident, informed stream and career decisions.</div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="card" id="quizcard">
+    <h2>Check Your Child's Career Clarity</h2>
+    <p class="lead">Answer honestly, as their parent. It takes less than two minutes.</p>
+    <div class="progress"><i id="pbar"></i></div>
+    <div id="questions"></div>
+    <button class="cta fullbtn dim" id="scorebtn" onclick="startScore()">See My Child's Clarity Score &rarr;</button>
+    <div class="trust">Free forever. Built for parents of students in Class VIII to XII.</div>
+  </div>
+
+  <div class="gate" id="gate">
+    <h3>The score is ready. <span>One last step.</span></h3>
+    <p>Tell me where to send your child's personalised clarity breakdown, and I'll reveal the score right here.</p>
+    <div class="fgrid">
+      <div class="fg" style="grid-column:1/-1;">
+        <label>Your Name (Parent)</label>
+        <input type="text" id="lname" placeholder="Full name" autocomplete="name">
+      </div>
+      <div class="fg">
+        <label>Email Address</label>
+        <input type="email" id="lemail" placeholder="you@example.com" autocomplete="email">
+      </div>
+      <div class="fg">
+        <label>WhatsApp Number</label>
+        <input type="tel" id="lwa" placeholder="10-digit mobile" autocomplete="tel" inputmode="numeric">
+      </div>
+      <div class="fg" style="grid-column:1/-1;">
+        <label>Your Child's Class</label>
+        <select id="lclass">
+          <option value="">Select class</option>
+          <option>Class VIII</option>
+          <option>Class IX</option>
+          <option>Class X</option>
+          <option>Class XI</option>
+          <option>Class XII</option>
+        </select>
+      </div>
+    </div>
+    <div class="gerr" id="gerr">Please check your details: a real name, a valid email, a 10-digit mobile number, and your child's class.</div>
+    <button class="cta fullbtn" onclick="submitLead(event)">Reveal the Clarity Score &rarr;</button>
+    <div class="lock">&#128274; Your details stay with me. No spam, no selling, ever.</div>
+  </div>
+
+  <div id="result">
+    <div class="bignum-wrap">
+      <div class="bignum-label">Career Clarity Quotient&trade;</div>
+      <div class="bignum" id="bignum" style="color:var(--indigo)">0<small>/100</small></div>
+      <div><span class="bandpill" id="bandpill">&nbsp;</span></div>
+      <div class="rhead" id="rhead">Here's where your child stands today.</div>
+    </div>
+
+    <div class="statgrid">
+      <div class="stat"><div class="v" id="s-clarity">–</div><div class="k">Clarity level</div></div>
+      <div class="stat"><div class="v" id="s-str">–</div><div class="k">Knows their strengths</div></div>
+      <div class="stat"><div class="v" id="s-own">–</div><div class="k">Choosing for themselves</div></div>
+      <div class="stat warn"><div class="v" id="s-gap">–</div><div class="k">Biggest gap to close</div></div>
+    </div>
+
+    <div class="msg"><p id="msgtext"></p></div>
+
+    <div class="vsl">
+      <h3>Their clarity has a path. <span>See how it works.</span></h3>
+      <p>In a short message, I'll show you how I help students go from confused to confident, choosing the right stream and career from their own strengths.</p>
+      <!-- VIDEO SLOT: when Sunitaa's video is ready, embed it here (a <video> tag or YouTube iframe) just above the button. -->
+      <a class="cta" id="bookbtn" href="https://cal.com/sunita-chowdhary-j8togg/30min" target="_blank" rel="noopener">Book a Career Clarity Session with Sunitaa &rarr;</a>
+      <div class="invite">A relaxed 30-minute conversation about your child's path. No pressure, just clarity.</div>
+    </div>
+  </div>
+</div>
+
+<section class="gallery">
+  <div class="wrap">
+    <h3>Guiding real students, in real classrooms.</h3>
+    <p class="gsub">Career clarity sessions across schools and colleges.</p>
+    <div class="ggrid">
+      <img src="student1.jpg" alt="Sunitaa Chowdary conducting a career session with students" loading="lazy">
+      <img src="student2.jpg" alt="Career clarity workshop with college students" loading="lazy">
+      <img src="student3.jpg" alt="Sunitaa Chowdary speaking at a student session" loading="lazy">
+      <img src="student4.jpg" alt="A full hall of students at a career guidance session" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="wrap">
+    <h3>Real students. Real clarity.</h3>
+    <p class="psub">A few families who went from confusion to a confident decision.</p>
+    <div class="tgrid">
+      <div class="tcard">
+        <div class="quote">“My son had chosen Commerce just to meet our expectations, but something always felt off. Sunitaa's assessment showed his real strength was the creative, artistic side. Today we finally understand him, and he's moving ahead with confidence.”</div>
+        <div class="ba"><b>Before:</b> Commerce, chosen under pressure &nbsp;·&nbsp; <b>After:</b> A creative path the whole family believes in</div>
+        <div class="who">— Parent of a Class XI student</div>
+      </div>
+      <div class="tcard">
+        <div class="quote">“We were terrified, ‘what if she doesn't clear NEET?' Sunitaa helped us see several strong paths matched to her real strengths. We left with relief, and the confidence that there is never just one road to success.”</div>
+        <div class="ba"><b>Before:</b> One exam, all the pressure &nbsp;·&nbsp; <b>After:</b> Several clear pathways, and a calm family</div>
+        <div class="who">— Parent of a NEET aspirant</div>
+      </div>
+    </div>
+    <p class="credbar">Guided by <b>Sunitaa Chowdary</b> — Certified Career Analyst, Educator, and author of <span class="accent">Growth: The Complete Blueprint</span>. Career choices made from a student's real strengths, not pressure.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Built with care by <b>Sunitaa Chowdary</b> &middot; Career Clarity &amp; Confidence Coach for School Students
+    <div class="accent" style="margin-top:6px;">Clarity creates confidence.</div>
+  </div>
+</footer>
+
+<script>
+/* ============ CONFIGURE ============ */
+const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbzCZ7oEAr2tfHq1znyFhRYCqQT3Liu_guZRmeUvEokepznq01fUN64qkckKy1khrrt63w/exec";
+const BOOKING_URL    = "https://cal.com/sunita-chowdhary-j8togg/30min";
+/* =================================== */
+
+const QUESTIONS = [
+  { q:"Does your child know which stream or career direction they want to pursue?",
+    a:["No idea yet","Some idea","Very clear"], key:"Knowing the direction" },
+  { q:"Does your child know their top strengths and natural talents?",
+    a:["Not really","Somewhat","Clearly"], key:"Knowing their strengths" },
+  { q:"What mainly influences your child's career choices?",
+    a:["Mostly marks / others","A mix","Mostly their own interests"], key:"Choosing for themselves" },
+  { q:"Does your child know which careers actually match their personality, strengths, and interests?",
+    a:["No","Vaguely","Yes"], key:"Matching careers to fit" },
+  { q:"Does your child have a clear next step or plan for their career journey?",
+    a:["No clear plan yet","A rough idea","A clear plan"], key:"A clear next step" }
+];
+
+const answers = new Array(QUESTIONS.length).fill(null);
+let R = null;
+
+const qWrap = document.getElementById('questions');
+QUESTIONS.forEach((item, i) => {
+  const q = document.createElement('div'); q.className = 'q';
+  q.innerHTML = '<div class="qtext"><span class="n">'+(i+1)+'.</span><span>'+item.q+'</span></div>';
+  const opts = document.createElement('div'); opts.className = 'opts';
+  item.a.forEach((label, val) => {
+    const o = document.createElement('div'); o.className = 'opt'; o.textContent = label;
+    o.onclick = () => {
+      answers[i] = val;
+      [...opts.children].forEach(c => c.classList.remove('sel'));
+      o.classList.add('sel');
+      updateProgress();
+    };
+    opts.appendChild(o);
+  });
+  q.appendChild(opts); qWrap.appendChild(q);
+});
+
+function updateProgress(){
+  const done = answers.filter(a => a !== null).length;
+  document.getElementById('pbar').style.width = (done/QUESTIONS.length*100) + '%';
+  const btn = document.getElementById('scorebtn');
+  if(done === QUESTIONS.length) btn.classList.remove('dim'); else btn.classList.add('dim');
+}
+
+function startScore(){
+  const done = answers.filter(a => a !== null).length;
+  if(done < QUESTIONS.length){
+    const first = answers.indexOf(null);
+    document.querySelectorAll('.q')[first].scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  const raw = answers.reduce((s,v) => s+v, 0);
+  const quotient = Math.round(raw / (QUESTIONS.length*2) * 100);
+  const band = quotient <= 40 ? {t:"Still Foggy", c:"var(--coral)"}
+             : quotient <= 70 ? {t:"Getting Clearer", c:"var(--gold)"}
+             : {t:"Clarity Champion", c:"var(--aqua)"};
+  const lvl = v => v === 0 ? "Low" : v === 1 ? "Medium" : "High";
+  const clarityPair = (answers[0]+answers[3])/2;
+  const clarity = clarityPair <= 0.5 ? "Low" : clarityPair < 1.5 ? "Medium" : "High";
+  let minV = Math.min(...answers), gapIdx = answers.indexOf(minV);
+  R = { quotient, band, clarity, str:lvl(answers[1]), own:lvl(answers[2]), gap:QUESTIONS[gapIdx].key };
+  document.getElementById('gate').classList.add('on');
+  document.getElementById('gate').scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function submitLead(e){
+  e.preventDefault();
+  if(!R) return;
+  const name = document.getElementById('lname').value.trim();
+  const email = document.getElementById('lemail').value.trim();
+  const cls = document.getElementById('lclass').value;
+  let mob = document.getElementById('lwa').value.trim().replace(/\D/g,'');
+  if(mob.length === 12 && mob.indexOf('91') === 0) mob = mob.slice(2);
+  if(mob.length === 11 && mob.charAt(0) === '0') mob = mob.slice(1);
+  const okName = name.length > 1;
+  const okEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+  const okPhone = /^[6-9]\d{9}$/.test(mob);
+  if(!(okName && okEmail && okPhone && cls)){ document.getElementById('gerr').style.display='block'; return; }
+  document.getElementById('gerr').style.display='none';
+
+  if(SHEET_ENDPOINT.indexOf('http') === 0){
+    try{
+      fetch(SHEET_ENDPOINT, { method:'POST', mode:'no-cors',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body: JSON.stringify({ name, email, whatsapp: mob,
+          score: R.quotient,
+          band: R.band.t + ' | ' + cls + ' | Gap: ' + R.gap,
+          date: new Date().toLocaleString('en-IN') }) });
+    }catch(err){}
+  }
+
+  if(BOOKING_URL.indexOf('http') === 0){
+    const notes = 'Career Clarity Quotient ' + R.quotient + '/100 (' + R.band.t + '), ' + cls +
+                  '. Biggest gap: ' + R.gap + '. From the Career Clarity Quotient quiz.';
+    document.getElementById('bookbtn').href = BOOKING_URL +
+      (BOOKING_URL.indexOf('?') > -1 ? '&' : '?') +
+      'name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email) +
+      '&notes=' + encodeURIComponent(notes);
+  }
+
+  document.getElementById('gate').classList.remove('on');
+  showResult(name);
+}
+
+function showResult(name){
+  const res = document.getElementById('result'); res.classList.add('on');
+  const pill = document.getElementById('bandpill');
+  pill.textContent = R.band.t; pill.style.background = R.band.c;
+  document.getElementById('bignum').style.color = R.band.c;
+  document.getElementById('rhead').textContent = 'Here’s where ' + name + '’s child stands today.';
+  document.getElementById('s-clarity').textContent = R.clarity;
+  document.getElementById('s-str').textContent = R.str;
+  document.getElementById('s-own').textContent = R.own;
+  document.getElementById('s-gap').textContent = R.gap;
+
+  const msg = R.quotient <= 40
+    ? "Right now, your child is choosing their future mostly in the dark, on marks, guesswork, and other people's opinions. This is the biggest decision of their school years, and it deserves more than a guess. The good news: <b>clarity is learnable</b>, and their biggest gap right now is ‘" + R.gap + "’. That is exactly where we start."
+    : R.quotient <= 70
+    ? "Your child has some clarity, but real gaps remain, especially around <b>‘" + R.gap + "’</b>. At this stage, a little structured guidance turns a rough idea into a confident, well-fitted decision, before the wrong stream costs them years."
+    : "Wonderful, your child already has strong clarity. The goal now is to sharpen it, pressure-test the choice against their true strengths, and lock in a confident plan. Their one area to polish is <b>‘" + R.gap + "’</b>.";
+  document.getElementById('msgtext').innerHTML = msg;
+
+  animateNumber(R.quotient);
+  res.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function animateNumber(target){
+  const el = document.getElementById('bignum'); const t0 = performance.now(), dur = 1500;
+  function tick(t){
+    const p = Math.min(1,(t-t0)/dur); const eased = 1 - Math.pow(1-p,3);
+    el.innerHTML = Math.round(target*eased) + '<small>/100</small>';
+    if(p < 1) requestAnimationFrame(tick); else el.innerHTML = target + '<small>/100</small>';
+  }
+  requestAnimationFrame(tick);
+}
+
+updateProgress();
+</script>
+</body>
+</html>
