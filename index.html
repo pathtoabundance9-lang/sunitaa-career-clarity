@@ -7,7 +7,7 @@
 <meta name="description" content="In 2 minutes, find out how clear your child (Class VIII–XII) really is about their stream and future career. Free, no spam.">
 <!--
   ============================================================
-  CAREER CLARITY QUOTIENT — landing page (V4 for Sunitaa Chowdary)
+  CAREER CLARITY QUOTIENT — landing page (V5 for Sunitaa Chowdary)
   V4 changes: new hero copy + 5 questions (from Sunitaa's doc), new photo
   (sunitaa.jpg), session-photo gallery (student1-4.jpg), updated result cards.
   Lead capture (Google Sheet) + Cal.com booking already wired below.
@@ -46,7 +46,7 @@
   .vbullets li:before{content:"\2713"; position:absolute; left:0; top:-1px; color:var(--gold); font-weight:800;}
   .hero .quoteline{font-size:clamp(17px,2.4vw,21px); color:var(--aqua); margin-top:2px;}
   .facecard{text-align:center;}
-  .avatar{width:min(190px,54vw); height:min(190px,54vw); border-radius:50%; margin:0 auto 12px; object-fit:cover; object-position:50% 14%; border:3px solid rgba(242,166,73,.75); box-shadow:0 16px 40px rgba(0,0,0,.34); display:block; background:#1b2a57;}
+  .avatar{width:min(190px,54vw); height:min(190px,54vw); border-radius:50%; margin:0 auto 12px; object-fit:cover; object-position:50% 30%; border:3px solid rgba(242,166,73,.75); box-shadow:0 16px 40px rgba(0,0,0,.34); display:block; background:#1b2a57;}
   .facecard .who{font-size:16px; font-weight:800; color:#fff; font-family:'Sora';}
   .facecard .cred{font-size:12.5px; color:#AEB9D6; max-width:270px; margin:5px auto 0; line-height:1.5;}
 
@@ -242,10 +242,9 @@
     <div class="msg"><p id="msgtext"></p></div>
 
     <div class="vsl">
-      <h3>Their clarity has a path. <span>See how it works.</span></h3>
-      <p>In a short message, I'll show you how I help students go from confused to confident, choosing the right stream and career from their own strengths.</p>
+      <h3>Their clarity has a path. <span>Let's map it together.</span></h3>
       <!-- VIDEO SLOT: when Sunitaa's video is ready, embed it here (a <video> tag or YouTube iframe) just above the button. -->
-      <a class="cta" id="bookbtn" href="https://cal.com/sunita-chowdhary-j8togg/30min" target="_blank" rel="noopener">Book a Career Clarity Session with Sunitaa &rarr;</a>
+      <a class="cta" id="bookbtn" href="https://cal.com/sunita-chowdhary-j8togg/30min" target="_blank" rel="noopener">Book a Free Discovery Call &rarr;</a>
       <div class="invite">A relaxed 30-minute conversation about your child's path. No pressure, just clarity.</div>
     </div>
   </div>
@@ -267,17 +266,17 @@
 <section class="proof">
   <div class="wrap">
     <h3>Real students. Real clarity.</h3>
-    <p class="psub">A few families who went from confusion to a confident decision.</p>
+    <p class="psub">A few students who went from confusion to confident career decisions.</p>
     <div class="tgrid">
       <div class="tcard">
-        <div class="quote">“My son had chosen Commerce just to meet our expectations, but something always felt off. Sunitaa's assessment showed his real strength was the creative, artistic side. Today we finally understand him, and he's moving ahead with confidence.”</div>
-        <div class="ba"><b>Before:</b> Commerce, chosen under pressure &nbsp;·&nbsp; <b>After:</b> A creative path the whole family believes in</div>
-        <div class="who">— Parent of a Class XI student</div>
+        <div class="quote">“My son had chosen Commerce to meet our expectations, but something always felt off. Sunitaa's assessment revealed that his true strengths lay in creativity and the arts. Today, we finally understand him, and he's moving forward with confidence.”</div>
+        <div class="ba"><b>Before:</b> Commerce, chosen to meet expectations &nbsp;·&nbsp; <b>After:</b> A path in creativity and the arts the family believes in</div>
+        <div class="who">— Parent of Aaryan, Class XI</div>
       </div>
       <div class="tcard">
-        <div class="quote">“We were terrified, ‘what if she doesn't clear NEET?' Sunitaa helped us see several strong paths matched to her real strengths. We left with relief, and the confidence that there is never just one road to success.”</div>
-        <div class="ba"><b>Before:</b> One exam, all the pressure &nbsp;·&nbsp; <b>After:</b> Several clear pathways, and a calm family</div>
-        <div class="who">— Parent of a NEET aspirant</div>
+        <div class="quote">“We were terrified, wondering, ‘What if Divya doesn't clear NEET?' Sunitaa helped us discover several strong career paths that matched Divya's true strengths. We left feeling relieved and confident, knowing there is never just one road to success.”</div>
+        <div class="ba"><b>Before:</b> One exam, all the pressure &nbsp;·&nbsp; <b>After:</b> Several strong career paths, and a relieved family</div>
+        <div class="who">— Parent of Divya, NEET aspirant</div>
       </div>
     </div>
     <p class="credbar">Guided by <b>Sunitaa Chowdary</b> — Certified Career Analyst, Educator, and author of <span class="accent">Growth: The Complete Blueprint</span>. Career choices made from a student's real strengths, not pressure.</p>
@@ -410,7 +409,7 @@ function showResult(name){
   document.getElementById('s-gap').textContent = R.gap;
 
   const msg = R.quotient <= 40
-    ? "Right now, your child is choosing their future mostly in the dark, on marks, guesswork, and other people's opinions. This is the biggest decision of their school years, and it deserves more than a guess. The good news: <b>clarity is learnable</b>, and their biggest gap right now is ‘" + R.gap + "’. That is exactly where we start."
+    ? "Right now, your child is choosing their future mostly on marks, trends, and other people's opinions. This is the biggest decision of their school years, and it deserves more than a guess. The good news: <b>clarity is learnable</b>, and their biggest gap right now is ‘" + R.gap + "’. That is exactly where we start."
     : R.quotient <= 70
     ? "Your child has some clarity, but real gaps remain, especially around <b>‘" + R.gap + "’</b>. At this stage, a little structured guidance turns a rough idea into a confident, well-fitted decision, before the wrong stream costs them years."
     : "Wonderful, your child already has strong clarity. The goal now is to sharpen it, pressure-test the choice against their true strengths, and lock in a confident plan. Their one area to polish is <b>‘" + R.gap + "’</b>.";
